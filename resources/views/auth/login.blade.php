@@ -1,227 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocean Landing Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login atau Daftar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            background-color: #0b3c49; /* Menghilangkan warna putih di pinggiran */
-        }
-
-        .container-fluid {
-            height: 100vh;
-            display: flex;
-            flex-direction: row;
-            margin: 0;
-        }
-
-        .image-section {
-            background: url('https://images.tokopedia.net/img/JFrBQq/2022/6/22/82d59c69-3324-4f53-9752-e711ff61f7b2.jpg') no-repeat center center/cover;
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .image-section h1 {
-            color: white;
-            font-size: 3rem;
-            border: 2px solid white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        .image-section .menu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .text-section {
-
-            background-color: #0b3c49;
-            color: white;
-            display: flex;
-            /* flex-direction: column; */
-            /* justify-content: center; */
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .text-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .text-section p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .text-section a {
-            text-decoration: none;
-            color: white;
-            background: #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .text-section a:hover {
-            background: #0056b3;
-        }
-
-        .social-icons {
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .social-icons a:hover {
-            color: #007bff;
-        }
-
-        /* Form styling */
-        .form-container {
-            width: 100%;
-            max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.055);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .form-container label {
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            background-color: #fff;
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
-
-        @media (max-width: 768px) {
-            .container-fluid {
-                flex-direction: column;
-            }
-
-            .image-section {
-                flex: 1;
-                height: 50vh;
-            }
-
-            .image-section h1 {
-                font-size: 2rem;
-                padding: 8px 16px;
-            }
-
-            .text-section {
-                flex: 1;
-                padding: 10px;
-            }
-
-            .text-section h2 {
-                font-size: 2rem;
-            }
-
-            .text-section p {
-                font-size: 0.9rem;
-            }
-
-            .text-section a {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-
-            .social-icons a {
-                font-size: 1.2rem;
-            }
+            font-family: 'Inter', sans-serif;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container-fluid">
-        <!-- Image Section -->
-        <div class="image-section">
-            <div class="menu">Beranda</div>
-            <h1>PENGADUAN MASYARAKAT</h1>
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 h-screen flex items-center justify-center">
+
+    <!-- Container Utama -->
+    <div class="flex flex-col md:flex-row bg-white shadow-2xl rounded-lg overflow-hidden max-w-4xl mx-auto">
+
+        <!-- Section Kiri -->
+        <div class="hidden md:flex flex-1 bg-gradient-to-br from-blue-600 to-blue-800 text-white items-center justify-center">
+            <div class="text-center p-8">
+                <h1 class="text-4xl font-bold mb-4 uppercase drop-shadow-lg">Pengaduan Masyarakat</h1>
+                <p class="text-lg font-light leading-relaxed">
+                    Transparansi dan solusi cepat untuk permasalahan Anda.
+                </p>
+            </div>
         </div>
 
-        <!-- Text Section -->
-        <div class="text-section">
-            <div class="form-container">
-                <h2>Login</h2>
-                <form action="{{ route('login') }}" method="POST">
+        <!-- Section Kanan -->
+        <div class="flex-1 flex items-center justify-center p-8">
+            <div class="w-full max-w-md">
+                <!-- Header -->
+                <h2 class="text-3xl font-bold text-center text-gray-700 mb-6">Login atau Daftar</h2>
+
+                <!-- Form -->
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
                     @csrf
+
+                    <!-- Input Email -->
                     <div>
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="email" class="block text-gray-600 font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
                     </div>
+                    <!-- Input Password -->
                     <div>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
+                        <label for="password" class="block text-gray-600 font-medium mb-2">Password</label>
+                        <input type="password" id="password" name="password" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
                     </div>
-                    <button type="submit">Login</button>
+
+                    <!-- Tombol Aksi -->
+                    <div class="flex justify-between">
+                        <button type="submit" name="action" value="login"
+                            class="w-[48%] bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+                            Login
+                        </button>
+                        <button type="submit" name="action" value="register"
+                            class="w-[48%] bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition">
+                            Daftar
+                        </button>
+                    </div>
                 </form>
+
+                <!-- Error Message -->
                 @if ($errors->any())
-                    <div>
+                    <div class="mt-4 text-red-600 text-sm">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                            @if(session('status'))
-                            <p>{{ session('status') }}</p>
-                            @endif
-
                         </ul>
                     </div>
-                @endif>
+                @endif
+
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 </body>
 </html>

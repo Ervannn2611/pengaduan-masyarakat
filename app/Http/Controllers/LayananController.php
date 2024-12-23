@@ -3,20 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\User;
+use App\Models\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReportsExport;
 class LayananController extends Controller
 {
+    public function search(Request $request)
+{
+    // $keyword = $request->input('keyword');
+    // $province = $request->input('province');
 
+    // $query = Report::query();
 
-    public function index()
-    {
-        $reports = Report::all(); // Ambil semua laporan dari database
-        return view('dashboard', compact('reports'));
+    // if ($keyword) {
+    //     $query->where('description', 'LIKE', '%' . $keyword . '%');
+    // }
+
+    // if ($province && $province !== 'Pilih Provinsi') {
+    //     $query->where('province', $province);
+    // }
+
+    // $reports = $query->get();
+
+    // return view('reports.index', compact('reports'));
+}
+public function export()
+{
+    return Excel::download(new ReportsExport, 'reports.xlsx');
+}
+public function index(Request $request)
+{
+    $provinceId = $request->input('province'); // Ambil input 'province'
+    if ($provinceId) {
+        // Query berdasarkan provinsi
+        $reports = \App\Models\Report::where('province', $provinceId)->get();
+
+        // Jika hasil kosong
+        if ($reports->isEmpty()) {
+            return redirect()->back()->with('error', 'Tidak ada laporan untuk provinsi ini.');
+        }
+    } else {
+        // Jika tidak ada input province, tampilkan semua data
+        $reports = \App\Models\Report::all();
     }
+
+    // Kembalikan data ke view
+    return view('dashboard', compact('reports', 'provinceId'));
+}
+
+
+
 
     public function create()
     {
@@ -75,19 +116,19 @@ class LayananController extends Controller
 
     public function detail()
     {
-        $reports = Report::where('user_id', auth()->id())->get(); // Ambil semua laporan dari database
+        $reports = Report::with('responses')->where('user_id', auth()->id())->latest()->get();
+
         return view('reports.detail', compact('reports'));
     }
     public function show($id)
     {
-        $report = Report::find($id);
+        $report = Report::findOrFail($id);
 
-        if (!$report) {
-            return redirect()->route('reports.index')->with('error', 'Report not found.');
-        }
+        $report->increment('viewers');
 
         return view('reports.article', compact('report'));
     }
+
 
     public function destroy($id)
     {

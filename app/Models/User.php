@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Response::class, 'staff_id');
     }
+
+    public function staffProvinces()
+    {
+        return $this->hasOne(staffProvince::class, 'user_id');
+    }
 }

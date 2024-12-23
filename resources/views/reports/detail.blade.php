@@ -1,92 +1,133 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Detail Pengaduan</title>
-    <!-- Tambahkan Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .report-header {
-            background-color: orange;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
+@extends('layouts.layout')
 
-        .report-header:hover {
-            background-color: #e67e22;
-        }
-    </style>
-</head>
-<body>
+@section('title', 'Detail Pengaduan')
+
+@section('content')
+<div class="bg-gray-100 min-h-screen font-poppins">
     @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- Alert Pesan Sukses -->
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-800 px-6 py-4 rounded-lg shadow-md mt-6 max-w-3xl mx-auto relative">
+        <p>{{ session('success') }}</p>
+        <button type="button" class="absolute top-2 right-2 text-green-800 hover:text-green-900 focus:outline-none" onclick="this.parentElement.remove();">&times;</button>
     </div>
     @endif
 
-    <div class="container mt-4">
-        <h1 class="text-center">Daftar Pengaduan</h1>
+    <div class="container mx-auto py-10 px-4">
 
         @foreach ($reports as $report)
-            <div class="mb-3">
-                <!-- Header Tanggal -->
-                <div class="report-header" data-bs-toggle="collapse" data-bs-target="#report-{{ $loop->index }}">
-                    Pengaduan {{ $report->created_at->format('d F Y') }}
-                </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8 transition-transform duration-300 hover:scale-105">
+            <!-- Header Tanggal -->
+            <div class="flex justify-between items-center bg-gradient-to-r from-blue-500 to-purple-700 text-white px-6 py-4 cursor-pointer hover:from-blue-600 hover:to-purple-800 transition duration-300"
+                data-bs-toggle="collapse" data-bs-target="#report-{{ $loop->index }}">
+                <span class="text-lg font-semibold">
+                    Pengaduan - {{ $report->created_at->format('d F Y') }}
+                </span>
+                <svg class="w-6 h-6 transform transition-transform duration-300" data-icon="dropdown" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5.516 7.548a1 1 0 011.415 0L10 10.616l3.07-3.07a1 1 0 011.414 1.415l-3.777 3.776a1 1 0 01-1.414 0L5.516 8.963a1 1 0 010-1.415z"/>
+                </svg>
+            </div>
 
-                <!-- Detail Pengaduan -->
-                <div id="report-{{ $loop->index }}" class="collapse">
-                    <div class="card card-body">
-                        <!-- Tabs Navigasi -->
-                        <ul class="nav nav-tabs" id="tab-{{ $loop->index }}" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="data-tab-{{ $loop->index }}" data-bs-toggle="tab" data-bs-target="#data-{{ $loop->index }}" type="button" role="tab" aria-controls="data-{{ $loop->index }}" aria-selected="true">Data</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="image-tab-{{ $loop->index }}" data-bs-toggle="tab" data-bs-target="#image-{{ $loop->index }}" type="button" role="tab" aria-controls="image-{{ $loop->index }}" aria-selected="false">Gambar</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="status-tab-{{ $loop->index }}" data-bs-toggle="tab" data-bs-target="#status-{{ $loop->index }}" type="button" role="tab" aria-controls="status-{{ $loop->index }}" aria-selected="false">Status</button>
-                            </li>
-                        </ul>
+            <!-- Konten Pengaduan -->
+            <div id="report-{{ $loop->index }}" class="hidden">
+                <div class="p-6 bg-gray-50">
+                    <!-- Tabs -->
+                    <div class="flex justify-center space-x-6 mb-6">
+                        <button class="tab-btn px-4 py-2 text-gray-700 font-medium hover:text-blue-600 transition duration-300 focus:outline-none border-b-2 border-transparent"
+                            data-target="data-{{ $loop->index }}">Data</button>
+                        <button class="tab-btn px-4 py-2 text-gray-700 font-medium hover:text-blue-600 transition duration-300 focus:outline-none border-b-2 border-transparent"
+                            data-target="image-{{ $loop->index }}">Gambar</button>
+                        <button class="tab-btn px-4 py-2 text-gray-700 font-medium hover:text-blue-600 transition duration-300 focus:outline-none border-b-2 border-transparent"
+                            data-target="status-{{ $loop->index }}">Status</button>
+                    </div>
 
-                        <!-- Konten Tabs -->
-                        <div class="tab-content mt-3" id="tabContent-{{ $loop->index }}">
-                            <!-- Tab Data -->
-                            <div class="tab-pane fade show active" id="data-{{ $loop->index }}" role="tabpanel" aria-labelledby="data-tab-{{ $loop->index }}">
-                                <p><strong>Tipe:</strong> {{ $report->type }}</p>
-                                <p><strong>Lokasi:</strong> {{ $report->province, $report->city, $report->district, $report->village }}</p>
-                                <p><strong>Deskripsi:</strong> {{ $report->description }}</p>
+                    <!-- Tab Content -->
+                    <div id="data-{{ $loop->index }}" class="tab-pane hidden">
+                        <p class="text-gray-700 mb-4"><span class="font-semibold">Tipe:</span> {{ $report->type }}</p>
+                        <p class="text-gray-700 mb-4"><span class="font-semibold">Lokasi:</span> {{ $report->province }}, {{ $report->regency }}, {{ $report->district }}, {{ $report->village }}</p>
+                        <p class="text-gray-700"><span class="font-semibold">Deskripsi:</span> {{ $report->description }}</p>
+                    </div>
+                    <div id="image-{{ $loop->index }}" class="tab-pane hidden">
+                        @if ($report->image)
+                        <img src="{{ asset('storage/' . $report->image) }}" alt="Gambar Pengaduan" class="max-w-md h-64 mx-auto rounded-lg shadow-md">
+                        @else
+                        <p class="text-gray-500">Tidak ada gambar tersedia.</p>
+                        @endif
+                    </div>
+                    <div id="status-{{ $loop->index }}" class="tab-pane hidden">
+                        @if ($report->responses->isNotEmpty())
+                        <div class="bg-gradient-to-r from-purple-500 to-purple-400 text-white rounded-lg p-6 shadow-lg">
+                            <p class="text-base font-semibold mb-4">
+                                Pengaduan telah ditanggapi, dengan status:
+                                <span class="inline-block bg-green-600 text-white rounded-full px-4 py-1 text-sm font-bold shadow-md">
+                                    {{ $report->responses->last()->response_status }}
+                                </span>
+                            </p>
+                            <div class="divide-y divide-orange-200">
+                                @foreach ($report->responseProgress as $index => $response)
+                                <div class="flex items-start py-3 {{ $loop->last ? '' : 'border-b border-orange-200' }}">
+                                    <div class="w-2 h-2 mt-1.5 bg-gray-800 rounded-full flex-shrink-0"></div>
+                                    <div class="ml-4">
+                                        <p class="text-sm text-gray-100 font-medium">
+                                            {{ $response->created_at->format('d F Y') }}
+                                        </p>
+                                        <p class="text-sm text-gray-200">
+                                            {{ $response->histories }}
+                                        </p>
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
-                            <!-- Tab Gambar -->
-                            <div class="tab-pane fade" id="image-{{ $loop->index }}" role="tabpanel" aria-labelledby="image-tab-{{ $loop->index }}">
-                                @if ($report->image)
-                                    <img src="{{ asset('storage/' . $report->image) }}" alt="Image Pengaduan" class="img-fluid" style="max-width: 300px;">
-                                @else
-                                    <p>Tidak ada gambar.</p>
-                                @endif
-                            </div>
-                            <!-- Tab Status -->
-                            <div class="tab-pane fade" id="status-{{ $loop->index }}" role="tabpanel" aria-labelledby="status-tab-{{ $loop->index }}">
-                                <p><strong>Status Pengaduan:</strong> STAFF belum merespon pengaduan kamu</p>
-                                <form action="{{ route('reports.destroy', $report->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengaduan ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </div>
-
                         </div>
+                        @else
+                        <div class="flex justify-between items-center bg-gradient-to-r from-purple-500 to-purple-400 text-white p-4 rounded-lg shadow-md">
+                            <p class="text-gray-600">Belum ada tanggapan.</p>
+                            <form action="{{ route('reports.destroy', $report->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus laporan ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition-shadow">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
+        </div>
         @endforeach
     </div>
+</div>
 
-    <!-- Tambahkan Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<!-- Script Tabs -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+
+                tabContents.forEach(content => content.classList.add('hidden'));
+                tabButtons.forEach(btn => btn.classList.remove('border-blue-500', 'text-blue-600'));
+
+                document.getElementById(targetId).classList.remove('hidden');
+                button.classList.add('border-blue-500', 'text-blue-600');
+            });
+        });
+
+        if (tabButtons.length && tabContents.length) {
+            tabButtons[0].classList.add('border-blue-500', 'text-blue-600');
+            tabContents[0].classList.remove('hidden');
+        }
+
+        document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = document.querySelector(button.dataset.bsTarget);
+                target.classList.toggle('hidden');
+                button.querySelector('[data-icon="dropdown"]').classList.toggle('rotate-180');
+            });
+        });
+    });
+</script>
+@endsection

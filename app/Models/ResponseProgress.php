@@ -23,5 +23,13 @@ class ResponseProgress extends Model
     {
         return $this->belongsTo(Response::class);
     }
+    public function report()
+    {
+        return $this->belongsTo(Report::class, 'report_id');
+    }
+    public function responseProgress()
+{
+    return $this->hasMany(ResponseProgress::class, 'report_id'); // Pastikan 'report_id' benar
+}
 }
 

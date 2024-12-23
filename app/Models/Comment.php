@@ -12,7 +12,7 @@ class Comment extends Model
 
     protected $fillable = [
         'report_id',
-        'comment', // Disesuaikan dengan kolom di form dan database
+        'comment',
         'user_id',
     ];
 

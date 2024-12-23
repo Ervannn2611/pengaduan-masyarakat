@@ -43,4 +43,17 @@ class Report extends Model
     {
         return $this->hasMany(Response::class);
     }
+
+
+    public function responseProgress()
+    {
+        return $this->hasManyThrough(
+            ResponseProgress::class,
+            Response::class,
+            'report_id',
+            'response_id',
+            'id',
+            'id'
+        );
+    }
 }

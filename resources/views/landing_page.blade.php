@@ -1,167 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM|Landing Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Landing Page Pengaduan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            background-color: #0b3c49; /* Menghilangkan warna putih di pinggiran */
-        }
-
-        .container-fluid {
-            height: 100vh;
-            display: flex;
-            flex-direction: row;
-            margin: 0;
-        }
-
-        .image-section {
-            background: url('https://images.tokopedia.net/img/JFrBQq/2022/6/22/82d59c69-3324-4f53-9752-e711ff61f7b2.jpg') no-repeat center center/cover;
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .image-section h1 {
-            color: white;
-            font-size: 3rem;
-            border: 2px solid white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        .image-section .menu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .text-section {
-            flex: 1;
-            background-color: #0b3c49;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .text-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .text-section p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .text-section a {
-            text-decoration: none;
-            color: white;
-            background: #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .text-section a:hover {
-            background: #0056b3;
-        }
-
-        .social-icons {
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .social-icons a:hover {
-            color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            .container-fluid {
-                flex-direction: column;
-            }
-
-            .image-section {
-                flex: 1;
-                height: 50vh;
-            }
-
-            .image-section h1 {
-                font-size: 2rem;
-                padding: 8px 16px;
-            }
-
-            .text-section {
-                flex: 1;
-                padding: 10px;
-            }
-
-            .text-section h2 {
-                font-size: 2rem;
-            }
-
-            .text-section p {
-                font-size: 0.9rem;
-            }
-
-            .text-section a {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-
-            .social-icons a {
-                font-size: 1.2rem;
-            }
+            font-family: 'Montserrat', 'Inter', sans-serif;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container-fluid">
-        <!-- Image Section -->
-        <div class="image-section">
-            <div class="menu">Beranda</div>
-            <h1>PENGADUAN MASYARAKAT</h1>
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 text-gray-900">
+
+    <!-- Container Utama -->
+    <div class="min-h-screen flex flex-col md:flex-row items-stretch justify-center">
+
+        <!-- Section Kiri -->
+        <div class="flex-1 flex items-center justify-center bg-gradient-to-r from-blue-800 to-blue-900 text-white px-8 py-12">
+            <div class="text-center space-y-6">
+                <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide uppercase drop-shadow-md">
+                    Pengaduan Masyarakat
+                </h1>
+                <p class="text-lg md:text-2xl font-light opacity-90 leading-relaxed">
+                    Transparansi, akuntabilitas, dan solusi cepat untuk Anda.
+                </p>
+            </div>
         </div>
 
-        <!-- Text Section -->
-        <div class="text-section">
-            <h2>LAYANAN PENGADUAN</h2>
-            <p>Pengaduan Masyarakat adalah layanan pengaduan yang diberikan kepada pihak pemerintah untuk menanggapi masalah-masalah yang dialami masyarakat secara langsung. Sistem ini dirancang untuk meningkatkan transparansi dan akuntabilitas dalam menangani permasalahan publik.</p>
-            <a href="{{ route('login') }}">Login</a>
-            <div class="social-icons">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
+        <!-- Section Kanan -->
+        <div class="flex-1 bg-white rounded-lg shadow-lg flex items-center justify-center px-6 py-12">
+            <div class="max-w-md w-full text-center">
+                <!-- Judul -->
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">
+                    Layanan Pengaduan
+                </h2>
+
+                <!-- Deskripsi -->
+                <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    Laporkan keluhan Anda secara efisien melalui sistem pengaduan ini. Kami siap membantu Anda.
+                </p>
+
+                <!-- Tombol Login -->
+                <div>
+                    <a href="{{ route('login') }}"
+                       class="inline-block bg-blue-600 text-white text-lg font-medium py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition transform duration-300">
+                        Bergabung
+                    </a>
+                </div>
+
+                <!-- Garis Pembatas -->
+                <div class="my-8 border-t border-gray-300"></div>
+
+                <!-- Ikon Sosial -->
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition duration-300">
+                        <i class="bi bi-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-pink-500 transition duration-300">
+                        <i class="bi bi-instagram text-2xl"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </body>
 </html>
